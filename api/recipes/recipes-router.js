@@ -12,7 +12,8 @@ router.get('/:recipe_id', (req, res, next) => {
 router.use((err, req, res, next) => { //eslint-disable-line
     res.status(500).json({
         customMessage: 'something went wrong inside the recipes router',
-        message: err.message
+        message: err.message, 
+        stack:err
     })
 })
 
