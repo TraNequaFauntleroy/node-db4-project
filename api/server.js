@@ -5,6 +5,6 @@ const server = express()
 
 server.use(express.json())
 
-server.use('api/recipes', recipesRouter)
+server.use('/api/recipes', recipesRouter)
 
 module.exports = server
