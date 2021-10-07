@@ -1,20 +1,30 @@
 
 exports.up = async function(knex) {
   await knex.schema
-    .createTable('recipes', table => {
-        table.increments('recipe_id')
-        table.string('recipe_name', 200).notNullable().unique()
+    .createTable('recipes', recipes => {
+        recipes.increments('recipe_id')
+        recipes.string('recipe_name', 200).notNullable().unique()
     })
-    .createTable('ingredients', table => {
-        table.increments('ingredients_id')
-        table.string('ingredient_name', 200).notNullable().unique()
-        table.string('ingredient_unit', 50)
+    .createTable('ingredients', ing => {
+        ing.increments('ingredients_id')
+        ing.string('ingredient_name', 200).notNullable().unique()
+        ing.string('ingredient_unit', 50)
     })
-    .createTable('steps', table => {
-        table.increments()
+    .createTable('steps', steps => {
+        steps.increments('step_id')
+        steps.string('step_instructions', 200).notNullable()
+        steps.integer('step_number').notNullable()
+        steps.integer('recipe_id')
+            .unsigned()
+            .notNullable()
+            .references('recipe_id')
+            .inTable('recipes')
+            .onDelete('RESTRICT')
+            .onUpdate('RESTRICT')
     })
-    .createTable('step_ingredients', table => {
-        table.increments()
+    .createTable('step_ingredients', step_ing => {
+        step_ing.increments('step_ing_id')
+        
     })
 };
 
