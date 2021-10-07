@@ -22,9 +22,23 @@ exports.up = async function(knex) {
             .onDelete('RESTRICT')
             .onUpdate('RESTRICT')
     })
-    .createTable('step_ingredients', step_ing => {
-        step_ing.increments('step_ing_id')
-        
+    .createTable('step_ingredients', step_ingredients => {
+        step_ingredients.increments('step_ingredientsredient_id')
+        step_ingredients.float('quantity').notNullable()
+        step_ingredients.integer('step_id')
+            .unsigned()
+            .notNullable()
+            .references('step_id')
+            .inTable('steps')
+            .onDelete('RESTRICT')
+            .onUpdate('RESTRICT')
+        step_ingredients.integer('ingredient_id')
+            .unsigned()
+            .notNullable()
+            .references('ingredient_id')
+            .inTable('ingredients')
+            .onDelete('RESTRICT')
+            .onUpdate('RESTRICT')
     })
 };
 
