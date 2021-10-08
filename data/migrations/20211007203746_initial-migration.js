@@ -6,7 +6,7 @@ exports.up = async function(knex) {
         recipes.string('recipe_name', 200).notNullable().unique()
     })
     .createTable('ingredients', ing => {
-        ing.increments('ingredients_id')
+        ing.increments('ingredient_id')
         ing.string('ingredient_name', 200).notNullable().unique()
         ing.string('ingredient_unit', 50)
     })
@@ -23,7 +23,7 @@ exports.up = async function(knex) {
             .onUpdate('RESTRICT')
     })
     .createTable('step_ingredients', step_ingredients => {
-        step_ingredients.increments('step_ingredientsredient_id')
+        step_ingredients.increments('step_ingredient_id')
         step_ingredients.float('quantity').notNullable()
         step_ingredients.integer('step_id')
             .unsigned()
